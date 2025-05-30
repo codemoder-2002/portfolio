@@ -99,6 +99,13 @@ export default function Hero() {
             <span className="px-4 py-2 bg-slate-800/80 backdrop-blur-sm rounded-full text-indigo-300 border border-indigo-500/20">
               Full Stack Developer
             </span>
+            <span className="px-4 py-2 flex place-items-center gap-2 bg-slate-800/80 backdrop-blur-sm rounded-full text-indigo-300 border border-indigo-500/20">
+              <div className=" relative ">
+                <div className=" absolute rounded size-2 bg-indigo-600" />
+                <div className=" animate-ping rounded size-2 bg-sky-600" />
+              </div>
+              Open to Work
+            </span>
           </motion.div>
 
           <motion.p
@@ -107,9 +114,9 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
           >
-            Building next-generation applications with AI, ML, and MERN.
-            Transforming ideas into innovative digital experiences through code
-            and creativity.
+            Full stack developer crafting fast, scalable web apps with MERN
+            stack. Solving complex problems through clean code and thoughtful
+            design.
           </motion.p>
 
           <motion.div
@@ -183,7 +190,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <CodeEditorDemo />
+          {/* <CodeEditorDemo /> */}
         </motion.div>
       </div>
     </section>

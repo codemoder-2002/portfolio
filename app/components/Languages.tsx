@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Globe } from "lucide-react"
-import SectionHeading from "./SectionHeading"
+import { motion } from "framer-motion";
+import { Globe } from "lucide-react";
+import SectionHeading from "./SectionHeading";
 
 // Language proficiency component
 const LanguageProficiency = ({
@@ -11,15 +11,20 @@ const LanguageProficiency = ({
   level,
   index,
 }: {
-  name: string
-  proficiency: string
-  level: number
-  index: number
+  name: string;
+  proficiency: string;
+  level: number;
+  index: number;
 }) => {
   // Generate dots for proficiency level
   const dots = Array.from({ length: 5 }).map((_, i) => (
-    <div key={i} className={`w-3 h-3 rounded-full ${i < level ? "bg-indigo-500" : "bg-slate-700"}`}></div>
-  ))
+    <div
+      key={i}
+      className={`w-3 h-3 rounded-full ${
+        i < level ? "bg-indigo-500" : "bg-slate-700"
+      }`}
+    ></div>
+  ));
 
   return (
     <motion.div
@@ -40,30 +45,33 @@ const LanguageProficiency = ({
 
       <div className="flex space-x-2">{dots}</div>
     </motion.div>
-  )
-}
+  );
+};
 
 export default function Languages() {
   const languages = [
     {
-      name: "Telugu",
+      name: "Gujarati",
       proficiency: "Native Proficiency",
       level: 5,
     },
     {
-      name: "English",
-      proficiency: "Professional Working Proficiency",
-      level: 4,
+      name: "English (IELTS-6.5)",
+      proficiency: "Limited Working Proficiency",
+      level: 3,
     },
     {
       name: "Hindi",
       proficiency: "Limited Working Proficiency",
-      level: 3,
+      level: 4,
     },
-  ]
+  ];
 
   return (
-    <section id="languages" className="py-20 relative overflow-hidden bg-slate-950">
+    <section
+      id="languages"
+      className="py-20 relative overflow-hidden bg-slate-950"
+    >
       {/* Background elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-slate-900 to-slate-950 z-0"></div>
 
@@ -83,5 +91,5 @@ export default function Languages() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -47,24 +47,24 @@ const EducationCard = ({
 export default function Education() {
   const education = [
     {
-      degree: "B.Tech in Artificial Intelligence & Machine Learning",
-      institution: "Malla Reddy University",
-      period: "2023 – 2027 (Pursuing)",
-      additional: "CGPA: 8.93",
+      degree: "B.Tech in Information Technology",
+      institution: "P P Savani University",
+      period: "2020 - 2024",
+      additional: "SGPA: 8.15",
       icon: BookOpen,
     },
     {
-      degree: "Intermediate (12th Grade)",
-      institution: "Geetanjali Jr. College",
-      period: "2021 – 2023",
-      additional: "Percentage: 86%",
+      degree: "12th Grade",
+      institution: "Shree Swaminarayan Gurukul",
+      period: "2018 - 2020",
+      additional: "Percentage: 65%",
       icon: Award,
     },
     {
       degree: "10th Grade",
-      institution: "Kendriya Vidyalaya",
-      period: "2011 – 2021",
-      additional: "Percentage: 76%",
+      institution: "J G Mavani High School",
+      period: "2017 - 2018",
+      additional: "Percentage: 85%",
       icon: GraduationCap,
     },
   ];

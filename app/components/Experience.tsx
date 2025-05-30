@@ -1,74 +1,69 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Briefcase, Calendar, MapPin, Zap } from "lucide-react"
-import SectionHeading from "./SectionHeading"
+import { motion } from "framer-motion";
+import { Briefcase, Calendar, MapPin, Zap } from "lucide-react";
+import SectionHeading from "./SectionHeading";
 
 export default function Experience() {
   const experiences = [
     {
-      period: "Feb 2025 - Present",
-      role: "Project Manager",
-      company: "Pramila Foundation",
+      period: "Dec 2024 – May 2025",
+      role: "Full Stack Developer",
+      company: "Cardexia",
       color: "indigo",
       projects: [
         {
-          title: "🌐 Website Development & Maintenance",
+          title: "Foundation Website Development & Maintenance",
           description:
-            "Oversaw the creation of the foundation's website, including design, functionality, and content updates. Continuously ensuring the website aligns with the foundation's goals and provides an accessible, user-friendly experience.",
+            "Led the end-to-end development and maintenance of the Pramila Foundation's official website. Focused on creating a clean, accessible, and user-friendly experience that aligns with the foundation's mission. Regularly updated content and ensured optimal performance across devices.",
         },
         {
-          title: "📱 Social Media Strategy & Management",
+          title: "Feature Development & Digital Strategy",
           description:
-            "Developed and implemented social media strategies to increase engagement and visibility for Pramila Foundation. Managed content creation, scheduling, and performance analytics for platforms like Facebook, Instagram, and Twitter.",
+            "Collaborated closely with the foundation to design and implement new website features and enhancements. Played a key role in developing social media strategies, content planning, and analytics to improve engagement on platforms such as Facebook, Instagram, and Twitter.",
         },
         {
-          title: "📋 Project Coordination & Team Management",
+          title: "E-commerce Platform Integration",
           description:
-            "Responsible for overseeing and guiding the activities of the team. Assigned roles and ensured smooth communication across all projects, focusing on both short-term deliverables and long-term goals for the foundation.",
+            "Spearheaded the design and development of an integrated e-commerce solution for the foundation. Ensured seamless communication across team members, assigned responsibilities, and aligned delivery with both short- and long-term organizational goals.",
         },
       ],
     },
     {
-      period: "Mar 2025 - Present",
-      role: "Web Developer",
-      company: "Unifesto",
+      period: "June 2024 – Present",
+      role: "Full Stack Developer",
+      company: "Freelance",
       color: "blue",
       projects: [
         {
-          title: "🌐 Event Management Website",
+          title: "Record Management Platform – Unifesto",
           description:
-            "Developed an event management platform for Unifesto, a student initiative startup. Responsible for designing the website, implementing key features like event registration, event schedule management, and user authentication.",
+            "Built a full-featured event management system for Unifesto, a student-led initiative. Implemented core modules including event registration, schedule tracking, and user authentication with a focus on responsive design and usability.",
         },
         {
-          title: "🛠️ Website Maintenance & Updates",
+          title: "Profile Management System",
           description:
-            "Ongoing maintenance of the Unifesto website, ensuring timely updates, bug fixes, and implementing new features based on feedback from users and event organizers.",
+            "Developed and maintained a user profile management interface for Unifesto, allowing users to register, update personal information, and track participation. Ensured secure data handling and smooth UX.",
+        },
+        {
+          title: "Responsive UI Enhancements & Bug Fixes",
+          description:
+            "Improved the website’s mobile responsiveness and visual layout. Addressed UI bugs, optimized performance, and incorporated user feedback for iterative enhancements.",
+        },
+        {
+          title: "Media Downloader Web App",
+          description:
+            "Created a web-based media downloader tool for Unifesto users to access and download event-related content. Focused on intuitive design, efficient downloads, and maintaining data privacy.",
         },
       ],
     },
-    {
-      period: "Oct 2024 - Nov 2024",
-      role: "Front-End Developer Intern",
-      company: "CodeAlpha",
-      color: "violet",
-      projects: [
-        {
-          title: "🎵 Music Player",
-          description:
-            "Developed an interactive web-based music player using HTML, CSS, and JavaScript, featuring custom audio controls and playlist functionality.",
-        },
-        {
-          title: "🖼️ Image Gallery",
-          description:
-            "Created a dynamic and responsive image gallery with JavaScript, implementing features like image zoom, lightbox view, and filtering.",
-        },
-      ],
-    },
-  ]
+  ];
 
   return (
-    <section id="experience" className="py-20 relative overflow-hidden bg-slate-950">
+    <section
+      id="experience"
+      className="py-20 relative overflow-hidden bg-slate-950"
+    >
       {/* Background elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/10 via-slate-900 to-slate-950 z-0"></div>
 
@@ -140,7 +135,9 @@ export default function Experience() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.3, delay: i * 0.1 + 0.2 }}
                       >
-                        <h4 className="text-lg font-semibold text-white mb-2">{project.title}</h4>
+                        <h4 className="text-lg font-semibold text-white mb-2">
+                          {project.title}
+                        </h4>
                         <p className="text-slate-300">{project.description}</p>
                       </motion.div>
                     ))}
@@ -152,5 +149,5 @@ export default function Experience() {
         </div>
       </div>
     </section>
-  )
+  );
 }

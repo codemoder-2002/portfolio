@@ -8,6 +8,7 @@ import {
   Brain,
   Clipboard,
   Settings,
+  Cpu,
 } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 
@@ -55,22 +56,23 @@ export default function About() {
     {
       icon: <Code className="w-8 h-8 text-indigo-400" />,
       title: "Frontend",
-      description: "HTML, CSS, JavaScript, React.js",
+      description:
+        "HTML, Tailwind Css, JavaScript, TypeScript , React.js , Next.js",
     },
     {
       icon: <Server className="w-8 h-8 text-blue-400" />,
       title: "Backend",
-      description: "Python, Java, C, C++, Node.js, Express.js",
+      description: "Node.js, Express.js, Nest js, GoLang(Fiber), Rust(Warp)",
     },
     {
       icon: <Database className="w-8 h-8 text-violet-400" />,
       title: "Database",
-      description: "MySQL, MongoDB",
+      description: "Scylladb, MongoDB, PostgreSQL, Redis, Dragonfly",
     },
     {
-      icon: <Brain className="w-8 h-8 text-fuchsia-400" />,
-      title: "AI/ML",
-      description: "Machine Learning, Deep Learning, Data Science",
+      icon: <Cpu className="w-8 h-8 text-fuchsia-400" />,
+      title: "Orm",
+      description: "Prisma, Mongoose, Drizzle",
     },
     {
       icon: <Clipboard className="w-8 h-8 text-sky-400" />,
@@ -80,7 +82,7 @@ export default function About() {
     {
       icon: <Settings className="w-8 h-8 text-teal-400" />,
       title: "Other",
-      description: "Salesforce, Cloud Computing",
+      description: "Kakfa, Docker, Turborepo(Next js) , Vercel",
     },
   ];
 
@@ -112,13 +114,15 @@ export default function About() {
               </div>
 
               <p className="text-xl text-slate-300 leading-relaxed mb-6">
-                Specializing in Front-End, AI/ML, and Project Management.
-                Skilled in MERN, Python, Java, and Salesforce, with expertise in
-                UI/UX, cloud computing, and Microsoft Office.
+                Specializing in Full Stack Development and Scalability. Skilled
+                in MERN, JavaScript, and performance optimization with a passion
+                for solving complex problems through clean, efficient code and
+                thoughtful architecture.
               </p>
               <p className="text-xl text-slate-300 leading-relaxed">
-                Passionate about building scalable, AI-driven solutions and
-                bridging tech with strategic management.
+                Passionate about building highly performant solutions using
+                diverse languages and databases to reduce latency and make
+                websites faster and scalable.
               </p>
             </div>
           </motion.div>

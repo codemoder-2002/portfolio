@@ -1,42 +1,62 @@
 "use client";
+
 import React from "react";
-import { Mail } from "lucide-react";
-import { Phone } from "lucide-react";
-import { MapPin } from "lucide-react";
-
-import { Send } from "lucide-react";
+import { Send, Mail, Phone, MapPin } from "lucide-react";
 import Link from "next/link";
+import { sendContactMessage } from "@/lib/actions/email";
 
-export default function ContactUs2() {
+export default function ContactUs() {
   const [state, setState] = React.useState({
     name: "",
     email: "",
+    subject: "",
     message: "",
-    errors: {} as Record<string, string>,
+    errors: {} as Record<string, string[]>,
     submitting: false,
     submitted: false,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setState({ ...state, submitting: true });
+    setState((prev) => ({ ...prev, submitting: true, submitted: false }));
 
-    // Console log only
-    console.log("Form submitted:", {
+    const result = await sendContactMessage({
       name: state.name,
       email: state.email,
+      subject: state.subject,
       message: state.message,
     });
 
-    setState({
-      ...state,
-      submitting: false,
-      submitted: true,
-    });
+    if (result.success) {
+      setState({
+        name: "",
+        email: "",
+        message: "",
+        subject: "",
+        errors: {},
+        submitting: false,
+        submitted: true,
+      });
+    } else {
+      setState((prev) => ({
+        ...prev,
+        submitting: false,
+        submitted: false,
+        errors:
+          result.errors && typeof result.errors === "object"
+            ? Object.fromEntries(
+                Object.entries(result.errors).map(([key, value]) => [
+                  key,
+                  Array.isArray(value) ? value : [String(value)],
+                ])
+              )
+            : {},
+      }));
+    }
   };
 
   return (
-    <section className="w-full mx-auto max-w-screen-lg px-2 z-50 relative">
+    <section className="w-full mx-auto max-w-screen-lg px-2 z-30 relative">
       <h2 className="mb-5 mt-4 bg-gradient-to-br from-indigo-500 via-sky-600 to-violet-500 bg-clip-text text-center text-4xl font-bold text-transparent md:text-6xl">
         Let&apos;s Get in Touch
       </h2>
@@ -44,8 +64,9 @@ export default function ContactUs2() {
         Fill out the form below and we&apos;ll get back to you as soon as
         possible.
       </p>
+
       <div
-        className="mx-auto mb-6 grid w-full items-start gap-12 rounded-lg border  bg-indigo-500 bg-opacity-10 px-4 pb-6 pt-10 shadow shadow-slate-800 md:grid-cols-2 lg:px-12"
+        className="mx-auto mb-6 grid w-full items-start gap-12 rounded-lg border bg-slate-800/50 px-4 pb-6 pt-10 shadow shadow-slate-800 md:grid-cols-2 lg:px-12"
         style={{
           backgroundImage:
             "radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)",
@@ -53,96 +74,104 @@ export default function ContactUs2() {
       >
         <form className="space-y-8 text-slate-300" onSubmit={handleSubmit}>
           <div className="space-y-4 text-lg">
-            <label htmlFor="name" />
-            Name
+            <label htmlFor="name">Name</label>
             <input
               id="name"
               type="text"
               required
-              className="flex h-10 w-full rounded-md border border-slate-700 bg-background bg-slate-950 px-3 py-2 text-sm shadow-inner shadow-slate-800 outline-none hover:border-slate-600 hover:outline-none hover:transition-all focus:border-slate-500 focus:outline-none"
-              placeholder="Enter your name"
-              name="name"
+              value={state.name}
+              onChange={(e) => setState({ ...state, name: e.target.value })}
+              className="flex h-10 w-full rounded-md border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white outline-none focus:border-slate-500"
+              placeholder="Your name"
             />
+            {state.errors.name && (
+              <p className="text-sm text-red-500">{state.errors.name[0]}</p>
+            )}
           </div>
 
           <div className="space-y-4 text-lg">
-            <label htmlFor="email" /> Email
+            <label htmlFor="email">Email</label>
             <input
               id="email"
-              placeholder="Enter your email"
               type="email"
-              className="hover:transition-al flex h-10 w-full rounded-md border border-slate-700 bg-background bg-slate-950 px-3 py-2 text-sm shadow-inner shadow-slate-800 outline-none file:text-sm file:font-medium placeholder:text-muted-foreground hover:border-slate-400 hover:outline-none focus:border-slate-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-              name="email"
               required
+              value={state.email}
+              onChange={(e) => setState({ ...state, email: e.target.value })}
+              className="flex h-10 w-full rounded-md border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white outline-none focus:border-slate-500"
+              placeholder="you@example.com"
             />
-            {state.errors && state.errors.email && (
-              <p className="mt-1 text-sm text-red-500">{state.errors.email}</p>
+            {state.errors.email && (
+              <p className="text-sm text-red-500">{state.errors.email[0]}</p>
             )}
           </div>
           <div className="space-y-4 text-lg">
-            <label htmlFor="message" className="text-lg" />
-            Message
-            <textarea
-              className="mb-5 flex min-h-[100px] w-full rounded-md border border-slate-700 bg-background bg-slate-950 px-3 py-2 text-sm text-white shadow-inner shadow-slate-800 outline-none ring-offset-background placeholder:text-muted-foreground hover:border-slate-400 hover:outline-none hover:transition-all focus:border-slate-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-              id="message"
-              placeholder="Enter your message"
-              name="message"
+            <label htmlFor="subject">Subject</label>
+            <input
+              id="subject"
+              type="text"
+              required
+              value={state.subject}
+              onChange={(e) => setState({ ...state, subject: e.target.value })}
+              className="flex h-10 w-full rounded-md border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white outline-none focus:border-slate-500"
+              placeholder="Subject of your message"
             />
-            {state.errors && (state.errors as any).message && (
-              <p className="mt-1 text-sm text-red-500">
-                {(state.errors as any).message}
-              </p>
+            {state.errors.subject && (
+              <p className="text-sm text-red-500">{state.errors.subject[0]}</p>
             )}
           </div>
+
+          <div className="space-y-4 text-lg">
+            <label htmlFor="message">Message</label>
+            <textarea
+              id="message"
+              required
+              value={state.message}
+              onChange={(e) => setState({ ...state, message: e.target.value })}
+              className="w-full min-h-[100px] rounded-md border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white outline-none focus:border-slate-500"
+              placeholder="Your message"
+            />
+            {state.errors.message && (
+              <p className="text-sm text-red-500">{state.errors.message[0]}</p>
+            )}
+          </div>
+
           <button
-            className="group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-slate-800 to-slate-700 py-2 text-center font-medium text-white shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset] transition-all duration-300 ease-in-out hover:from-slate-700 hover:to-slate-800 hover:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
             type="submit"
+            className="w-full rounded-md bg-gradient-to-br from-slate-800 to-slate-700 py-2 font-medium text-white hover:from-slate-700 hover:to-slate-800 transition"
             disabled={state.submitting}
           >
-            {state.submitting ? "Sending..." : "Send"}
-            <Send className="mx-2 inline h-4" />
+            {state.submitting ? "Sending..." : "Send"}{" "}
+            <Send className="ml-2 inline h-4" />
           </button>
+
+          {state.submitted && (
+            <p className="text-sm text-green-400">Message sent successfully!</p>
+          )}
         </form>
+
         <div>
           <h3 className="mb-10 text-2xl font-semibold text-slate-300">
             Connect with Us
           </h3>
-          <div className="mb-12 flex gap-8">
-            <Link
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-600 shadow-inner shadow-gray-800 hover:shadow-md hover:shadow-slate-500 hover:transition hover:duration-300 hover:ease-in-out"
-              href="#"
-            >
-              <Mail className="h-5 w-5 text-white" />
-            </Link>
+          <div className="mb-8 flex gap-4 items-start">
+            <Mail className="h-6 w-6 text-white mt-1" />
             <div className="text-md text-slate-300">
-              <p>Email to us at </p>
+              <p>Email:</p>
               <p>yashsavani540@gmail.com</p>
             </div>
           </div>
-
-          <div className="mb-12 flex gap-8">
-            <Link
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-600 shadow-inner shadow-gray-800 hover:shadow-md hover:shadow-slate-500 hover:transition hover:duration-300 hover:ease-in-out"
-              href="#"
-            >
-              <Phone className="h-5 w-5 text-white" />
-            </Link>
+          <div className="mb-8 flex gap-4 items-start">
+            <Phone className="h-6 w-6 text-white mt-1" />
             <div className="text-md text-slate-300">
-              <p>Call us at </p>
-              <p>90540 84174</p>
+              <p>Call:</p>
+              <p>+91 90540 84174</p>
             </div>
           </div>
-
-          <div className="mb-12 flex gap-8">
-            <Link
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-600 px-2 shadow-inner shadow-gray-800 hover:shadow-md hover:shadow-slate-500 hover:transition hover:duration-300 hover:ease-in-out"
-              href="#"
-            >
-              <MapPin className="h-5 w-5 text-white" />
-            </Link>
+          <div className="mb-8 flex gap-4 items-start">
+            <MapPin className="h-6 w-6 text-white mt-1" />
             <div className="text-md text-slate-300">
-              <p>Location at </p>
-              <p>Surat</p>
+              <p>Location:</p>
+              <p>Surat, Gujarat</p>
             </div>
           </div>
         </div>

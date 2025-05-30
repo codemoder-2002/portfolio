@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { motion, useScroll, useTransform } from "framer-motion"
-import { useRef } from "react"
-import { Award, CheckCircle, ExternalLink } from "lucide-react"
-import SectionHeading from "./SectionHeading"
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
+import { Award, CheckCircle, ExternalLink } from "lucide-react";
+import SectionHeading from "./SectionHeading";
 
 // Certificate card component
 const CertificateCard = ({
@@ -12,24 +12,40 @@ const CertificateCard = ({
   year,
   index,
 }: {
-  title: string
-  issuer: string
-  year: number
-  index: number
+  title: string;
+  issuer: string;
+  year: number;
+  index: number;
 }) => {
-  const cardRef = useRef<HTMLDivElement>(null)
+  const cardRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: cardRef,
     offset: ["start end", "end start"],
-  })
+  });
 
-  const y = useTransform(scrollYProgress, [0, 1], [50, -50])
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0.8])
-  const scale = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.9, 1, 1, 0.95])
-  const rotate = useTransform(scrollYProgress, [0, 1], [index % 2 === 0 ? 2 : -2, index % 2 === 0 ? -2 : 2])
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.8, 1],
+    [0, 1, 1, 0.8]
+  );
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 0.2, 0.8, 1],
+    [0.9, 1, 1, 0.95]
+  );
+  const rotate = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [index % 2 === 0 ? 2 : -2, index % 2 === 0 ? -2 : 2]
+  );
 
   return (
-    <motion.div ref={cardRef} style={{ y, opacity, scale, rotate }} className="h-full">
+    <motion.div
+      ref={cardRef}
+      style={{ y, opacity, scale, rotate }}
+      className="h-full"
+    >
       <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-xl border border-indigo-500/20 h-full shadow-lg hover:shadow-indigo-500/10 transition-all duration-300 hover:-translate-y-1 group">
         <div className="flex justify-between items-start mb-4">
           <div className="p-3 rounded-full bg-indigo-500/20">
@@ -50,8 +66,8 @@ const CertificateCard = ({
         </div>
       </div>
     </motion.div>
-  )
-}
+  );
+};
 
 // Floating particles animation
 const FloatingParticles = () => {
@@ -68,8 +84,16 @@ const FloatingParticles = () => {
             opacity: Math.random() * 0.5 + 0.3,
           }}
           animate={{
-            x: [Math.random() * 100 + "%", Math.random() * 100 + "%", Math.random() * 100 + "%"],
-            y: [Math.random() * 100 + "%", Math.random() * 100 + "%", Math.random() * 100 + "%"],
+            x: [
+              Math.random() * 100 + "%",
+              Math.random() * 100 + "%",
+              Math.random() * 100 + "%",
+            ],
+            y: [
+              Math.random() * 100 + "%",
+              Math.random() * 100 + "%",
+              Math.random() * 100 + "%",
+            ],
             rotate: [0, 180, 360],
           }}
           transition={{
@@ -80,54 +104,38 @@ const FloatingParticles = () => {
         />
       ))}
     </div>
-  )
-}
+  );
+};
 
 export default function Certifications() {
   const certifications = [
     {
-      title: "Career Essentials in Generative AI",
-      issuer: "Microsoft & LinkedIn",
-      year: 2024,
-    },
-    {
-      title: "Elements of AI: Introduction to AI",
-      issuer: "University of Helsinki",
-      year: 2024,
-    },
-    {
-      title: "Professional Soft Skills Learning Pathway",
-      issuer: "LinkedIn",
+      title: "Web Volunteer: Google Developer Student Clubs",
+      issuer: "Google Developer Student Club of P P Savani University",
       year: 2023,
     },
     {
-      title: "Career Essentials in Project Management",
-      issuer: "Microsoft",
-      year: 2024,
+      title: "React.js",
+      issuer: "Internshala",
+      year: 2022,
     },
-    {
-      title: "Managing Projects",
-      issuer: "Project Management Institute",
-      year: 2024,
-    },
-    {
-      title: "Introduction to Responsible AI",
-      issuer: "Google",
-      year: 2024,
-    },
-  ]
+  ];
 
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
-  })
+  });
 
-  const headerY = useTransform(scrollYProgress, [0, 0.5], [100, 0])
-  const headerOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1])
+  const headerY = useTransform(scrollYProgress, [0, 0.5], [100, 0]);
+  const headerOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
 
   return (
-    <section id="certifications" className="py-20 relative overflow-hidden bg-slate-950" ref={containerRef}>
+    <section
+      id="certifications"
+      className="py-20 relative overflow-hidden h-screen bg-slate-950"
+      ref={containerRef}
+    >
       {/* Background elements */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/10 via-slate-900 to-slate-950 z-0"></div>
       <FloatingParticles />
@@ -139,10 +147,16 @@ export default function Certifications() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {certifications.map((cert, index) => (
-            <CertificateCard key={index} title={cert.title} issuer={cert.issuer} year={cert.year} index={index} />
+            <CertificateCard
+              key={index}
+              title={cert.title}
+              issuer={cert.issuer}
+              year={cert.year}
+              index={index}
+            />
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

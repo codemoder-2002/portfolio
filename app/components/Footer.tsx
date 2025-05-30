@@ -6,7 +6,7 @@ import { Mail } from "lucide-react";
 
 function Footer() {
   return (
-    <footer className="border-t border-zinc-800 py-12">
+    <footer className="border-t border-zinc-800 p-12">
       <div className="container flex flex-col md:flex-row justify-between items-center gap-6">
         <div>
           <Link href="/" className="font-bold text-xl">
@@ -18,10 +18,6 @@ function Footer() {
               <> </>Savani
             </span>
           </Link>
-          <p className="text-sm text-zinc-500 mt-2">
-            © {new Date().getFullYear()} Shine Kyaw Kyaw Aung. All rights
-            reserved.
-          </p>
         </div>
         <div className="flex gap-4">
           <Link
