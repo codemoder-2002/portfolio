@@ -82,7 +82,7 @@ export default function About() {
     {
       icon: <Settings className="w-8 h-8 text-teal-400" />,
       title: "Other",
-      description: "Kakfa, Docker, Turborepo(Next js) , Vercel",
+      description: "Kafka, Docker, Turborepo(Next.js) , Vercel, Clerk",
     },
   ];
 

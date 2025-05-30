@@ -67,7 +67,7 @@ export default function Hero() {
         </svg>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10 flex flex-col lg:flex-row items-center">
+      <div className="container mx-auto gap-7 px-6 relative z-10 flex flex-col lg:flex-row items-center">
         {/* Text content */}
         <motion.div
           className="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0"
