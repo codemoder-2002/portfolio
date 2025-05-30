@@ -190,7 +190,7 @@ export default function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          {/* <CodeEditorDemo /> */}
+          <CodeEditorDemo />
         </motion.div>
       </div>
     </section>
