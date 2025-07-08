@@ -42,7 +42,7 @@ export default function Hero() {
       className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden bg-slate-950 pt-20"
     >
       {/* Background elements */}
-      <div className="absolute inset-0 bg-transparent bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-slate-900 to-slate-950 z-10"></div>
+      <div className="absolute inset-0 bg-transparent bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-900/20 via-slate-900 to-slate-950 z-0"></div>
       {/* <div className="absolute inset-0 opacity-50 z-0 h-full w-full items-center px-5 py-24 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)]"></div> */}
 
       {/* Grid pattern */}
