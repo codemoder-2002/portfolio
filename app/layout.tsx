@@ -12,10 +12,10 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata = {
-  title: "Yash Savani | AI Engineer & Developer",
+  title: "Yash Savani | Full Stack Developer",
   description:
-    "Portfolio of Yash Savani - AI Engineer, Web Developer, and Project Manager.",
-  generator: "v0.dev",
+    "Portfolio of Yash Savani - Full Stack developer | Next js | Express js | Typescript | Nest js | Go | Rust",
+  generator: "yash savani",
 };
 
 export default function RootLayout({
