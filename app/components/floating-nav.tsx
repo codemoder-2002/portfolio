@@ -75,12 +75,19 @@ export function FloatingNav() {
                     {item.name}
                   </Link>
                 ))}
-                <Button
-                  size="sm"
-                  className="ml-2 bg-gradient-to-r from-indigo-500 to-indigo-700 hover:from-indigo-600 hover:to-indigo-900 border-0 text-white"
+                <Link
+                  href="https://drive.google.com/file/d/17Z8MwIN_D97XmfMQMEpeVy0Jmzfp37Et/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Resume
-                </Button>
+                  <Button
+                    size="sm"
+                    variant={"link"}
+                    className="ml-2 bg-gradient-to-r from-indigo-500 to-indigo-700 hover:from-indigo-600 hover:to-indigo-900 border-0 text-white"
+                  >
+                    Resume
+                  </Button>
+                </Link>
               </div>
             </div>
           )}

@@ -6,7 +6,7 @@ import { Mail } from "lucide-react";
 
 function Footer() {
   return (
-    <footer className="border-t border-zinc-800 p-12">
+    <footer className="border-t border-zinc-800 p-12 z-20 relative">
       <div className="container flex flex-col md:flex-row justify-between items-center gap-6">
         <div>
           <Link href="/" className="font-bold text-xl">
