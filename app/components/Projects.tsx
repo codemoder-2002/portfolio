@@ -154,7 +154,7 @@ export default function Projects() {
     {
       title: "Authentication System",
       description:
-        "Decentralized storage and control of patient records using smart contracts.",
+        "Rust API with JWT and OAuth for secure and fast user authentication.",
       techStack: "Rust, Warp, PostgreSql, Docker, JWT, OAuth, Kafka",
       web: "",
       github: "https://github.com/codemoder-2002/rust_hybrid_auth_api_warp",
