@@ -270,6 +270,7 @@ export default function Projects() {
 
           {categories.map((category) => (
             <button
+              type="button"
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
               className={`px-4 py-2 rounded-full flex items-center gap-2 transition-all duration-300 ${

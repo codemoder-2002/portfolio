@@ -7,7 +7,7 @@ import SectionHeading from "./SectionHeading";
 export default function Experience() {
   const experiences = [
     {
-      period: "Dec 2024 – May 2025",
+      period: "Dec 2023 - May 2024",
       role: "Full Stack Developer",
       company: "Cardexia",
       color: "indigo",
