@@ -58,6 +58,9 @@ module.exports = {
         "pulse-glow": "pulse-glow 2s ease-in-out infinite alternate",
         float: "float 6s ease-in-out infinite",
         "circuit-flow": "circuit-flow 4s linear infinite",
+        shimmer: "shimmer 2s linear infinite",
+        glow: "glow 3s ease-in-out infinite",
+        "slide-up": "slide-up 0.5s ease-out",
       },
       keyframes: {
         "gradient-x": {

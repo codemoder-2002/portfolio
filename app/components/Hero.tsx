@@ -1,10 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Mail } from "lucide-react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
+import { Mail, Sparkles, Download, ArrowRight } from "lucide-react";
 import { smoothScrollTo } from "@/utils/smoothScroll";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { CodeEditorDemo } from "./CodeEditor";
+import { useRef } from "react";
 
 // Enhanced typing animation component
 const TypingAnimation = ({
@@ -32,6 +33,50 @@ const TypingAnimation = ({
         </motion.span>
       ))}
     </motion.span>
+  );
+};
+
+// Magnetic button component
+const MagneticButton = ({
+  children,
+  className,
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & { children: React.ReactNode }) => {
+  const ref = useRef<HTMLButtonElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const springConfig = { damping: 15, stiffness: 150 };
+  const springX = useSpring(x, springConfig);
+  const springY = useSpring(y, springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    x.set((e.clientX - centerX) * 0.3);
+    y.set((e.clientY - centerY) * 0.3);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.button
+      ref={ref}
+      style={{ x: springX, y: springY }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={className}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      {...props}
+    >
+      {children}
+    </motion.button>
   );
 };
 
@@ -84,8 +129,8 @@ export default function Hero() {
             Hello, World!
           </motion.p>
 
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-display">
-            <span className="text-white">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 font-display">
+            <span className="bg-gradient-to-r from-white via-indigo-200 to-white bg-clip-text text-transparent">
               <TypingAnimation text="I'm Yash Savani" />
             </span>
           </h1>
@@ -96,27 +141,36 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <span className="px-4 py-2 bg-slate-800/80 backdrop-blur-sm rounded-full text-indigo-300 border border-indigo-500/20">
+            <motion.span 
+              className="px-5 py-2.5 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 backdrop-blur-sm rounded-full text-indigo-300 border border-indigo-500/30 flex items-center gap-2 shadow-lg shadow-indigo-500/10"
+              whileHover={{ scale: 1.05, borderColor: "rgba(99, 102, 241, 0.5)" }}
+            >
+              <Sparkles className="w-4 h-4" />
               Full Stack Developer
-            </span>
-            <span className="px-4 py-2 flex place-items-center gap-2 bg-slate-800/80 backdrop-blur-sm rounded-full text-indigo-300 border border-indigo-500/20">
-              <div className=" relative ">
-                <div className=" absolute rounded size-2 bg-indigo-600" />
-                <div className=" animate-ping rounded size-2 bg-sky-600" />
+            </motion.span>
+            <motion.span 
+              className="px-5 py-2.5 flex place-items-center gap-2 bg-gradient-to-r from-green-500/10 to-emerald-500/10 backdrop-blur-sm rounded-full text-green-300 border border-green-500/30 shadow-lg shadow-green-500/10"
+              whileHover={{ scale: 1.05, borderColor: "rgba(34, 197, 94, 0.5)" }}
+            >
+              <div className="relative">
+                <div className="absolute rounded size-2 bg-green-500" />
+                <div className="animate-ping rounded size-2 bg-emerald-400" />
               </div>
               Open to Work
-            </span>
+            </motion.span>
           </motion.div>
 
           <motion.p
-            className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto lg:mx-0"
+            className="text-lg md:text-xl text-slate-300 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6 }}
           >
-            Full stack developer crafting fast, scalable web apps with MERN
-            stack. Solving complex problems through clean code and thoughtful
-            design.
+            Full stack developer crafting{" "}
+            <span className="text-indigo-400 font-semibold">fast, scalable web apps</span>{" "}
+            with MERN stack. Solving complex problems through{" "}
+            <span className="text-purple-400 font-semibold">clean code</span>{" "}
+            and thoughtful design.
           </motion.p>
 
           <motion.div
@@ -125,27 +179,36 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
-            <a
+            <motion.a
               href="https://www.linkedin.com/in/yash-savani-078621357/"
-              className="p-3 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-indigo-600 hover:border-indigo-500 transition-all duration-300"
+              className="group p-4 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-blue-600 hover:border-blue-500 transition-all duration-300 relative overflow-hidden"
               aria-label="LinkedIn Profile"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <FaLinkedin className="w-6 h-6" />
-            </a>
-            <a
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <FaLinkedin className="w-6 h-6 relative z-10" />
+            </motion.a>
+            <motion.a
               href="mailto:yashsavani540@gmail.com"
-              className="p-3 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-indigo-600 hover:border-indigo-500 transition-all duration-300"
+              className="group p-4 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-indigo-600 hover:border-indigo-500 transition-all duration-300 relative overflow-hidden"
               aria-label="Email Contact"
+              whileHover={{ scale: 1.1, rotate: -5 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <Mail className="w-6 h-6" />
-            </a>
-            <a
+              <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/0 to-indigo-600/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <Mail className="w-6 h-6 relative z-10" />
+            </motion.a>
+            <motion.a
               href="https://github.com/codemoder-2002"
-              className="p-3 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-indigo-600 hover:border-indigo-500 transition-all duration-300"
+              className="group p-4 rounded-full bg-slate-800/80 backdrop-blur-sm border border-slate-700 hover:bg-purple-600 hover:border-purple-500 transition-all duration-300 relative overflow-hidden"
               aria-label="GitHub Profile"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <FaGithub className="w-6 h-6" />
-            </a>
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600/0 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <FaGithub className="w-6 h-6 relative z-10" />
+            </motion.a>
           </motion.div>
 
           <motion.div
@@ -154,32 +217,28 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1 }}
           >
-            <a
-              href="https://drive.google.com/file/d/17Z8MwIN_D97XmfMQMEpeVy0Jmzfp37Et/view?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-8 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition-all duration-300 flex items-center justify-center gap-2"
+            <MagneticButton
+              onClick={() => window.open("https://drive.google.com/file/d/17Z8MwIN_D97XmfMQMEpeVy0Jmzfp37Et/view?usp=sharing", "_blank")}
+              className="group px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-full transition-all duration-300 flex items-center justify-center gap-3 shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 relative overflow-hidden"
             >
-              <span>Download Resume</span>
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
-              >
-                →
-              </motion.span>
-            </a>
-            <button
+              <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+              <Download className="w-5 h-5 relative z-10" />
+              <span className="relative z-10 font-semibold">Download Resume</span>
+              <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" />
+            </MagneticButton>
+            <MagneticButton
               onClick={() => smoothScrollTo("about")}
-              className="px-8 py-3 border border-indigo-500 text-indigo-300 hover:bg-indigo-600/20 rounded-full transition-all duration-300 flex items-center justify-center gap-2"
+              className="group px-8 py-4 border-2 border-indigo-500 text-indigo-300 hover:bg-indigo-600/20 rounded-full transition-all duration-300 flex items-center justify-center gap-3 backdrop-blur-sm hover:border-indigo-400"
             >
-              <span>Explore My Work</span>
+              <span className="font-semibold">Explore My Work</span>
               <motion.span
                 animate={{ y: [0, 5, 0] }}
                 transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
+                className="text-xl"
               >
                 ↓
               </motion.span>
-            </button>
+            </MagneticButton>
           </motion.div>
         </motion.div>
 

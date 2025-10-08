@@ -1,0 +1,60 @@
+# Project Images Placeholder
+
+This directory contains project images for the portfolio.
+
+## Image Structure
+
+Each project should have:
+- A hero image (main project image)
+- Additional screenshots/mockups (optional)
+
+## Naming Convention
+
+For each project (using project ID):
+- {project-id}-hero.jpg - Main project image
+- {project-id}-{description}.jpg - Additional images
+
+## Current Projects
+
+1. cardexia-ecommerce
+   - cardexia-hero.jpg
+   - cardexia-dashboard.jpg
+   - cardexia-cart.jpg
+   - cardexia-analytics.jpg
+
+2. bingo-game
+   - bingo-hero.jpg
+   - bingo-gameplay.jpg
+   - bingo-lobby.jpg
+   - bingo-leaderboard.jpg
+
+3. record-management-system
+   - rms-hero.jpg
+   - rms-customer.jpg
+   - rms-inventory.jpg
+   - rms-analytics.jpg
+
+4. media-downloader
+   - downloader-hero.jpg
+   - downloader-interface.jpg
+   - downloader-progress.jpg
+   - downloader-history.jpg
+
+5. patient-blockchain
+   - blockchain-hero.jpg
+   - blockchain-dashboard.jpg
+   - blockchain-smart-contract.jpg
+   - blockchain-sharing.jpg
+
+6. rust-auth-api
+   - rust-auth-hero.jpg
+   - rust-auth-architecture.jpg
+   - rust-auth-performance.jpg
+   - rust-auth-security.jpg
+
+## TODO
+
+- Add actual project screenshots
+- Optimize images for web (WebP format)
+- Add alt text descriptions
+- Consider using image CDN for better performance

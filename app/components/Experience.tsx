@@ -73,7 +73,7 @@ export default function Experience() {
         <div className="max-w-5xl mx-auto">
           {experiences.map((exp, index) => (
             <motion.div
-              key={index}
+              key={exp.company}
               className="mb-12 relative"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -107,40 +107,51 @@ export default function Experience() {
                 </div>
 
                 {/* Content */}
-                <div className="ml-8 bg-slate-900/80 backdrop-blur-md p-6 rounded-2xl border border-indigo-500/20 flex-1">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                    <h3 className="text-2xl font-bold text-white flex items-center gap-2 font-display">
-                      <Zap className={`w-5 h-5 text-${exp.color}-400`} />
-                      {exp.role}
-                    </h3>
-                    <div className="flex items-center text-indigo-400 mt-2 md:mt-0">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      <span>{exp.period}</span>
+                <div className="ml-8 bg-gradient-to-br from-slate-900/90 to-slate-900/50 backdrop-blur-md p-6 rounded-3xl border border-indigo-500/20 hover:border-indigo-500/40 flex-1 relative overflow-hidden group shadow-lg hover:shadow-indigo-500/20 transition-all duration-300">
+                  {/* Animated gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-purple-500/0 to-indigo-500/0 group-hover:from-indigo-500/10 group-hover:via-purple-500/5 group-hover:to-indigo-500/10 transition-all duration-500" />
+                  
+                  <div className="relative z-10">
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                      <h3 className="text-2xl font-bold text-white flex items-center gap-2 font-display group-hover:text-indigo-200 transition-colors">
+                        <Zap className={`w-5 h-5 text-${exp.color}-400`} />
+                        {exp.role}
+                      </h3>
+                      <div className="flex items-center text-indigo-400 mt-2 md:mt-0 bg-indigo-500/10 px-3 py-1.5 rounded-full border border-indigo-500/20">
+                        <Calendar className="w-4 h-4 mr-1.5" />
+                        <span className="font-semibold text-sm">{exp.period}</span>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="flex items-center mb-6">
-                    <MapPin className="w-4 h-4 text-slate-400 mr-1" />
-                    <span className="text-slate-300">{exp.company}</span>
-                  </div>
+                    <div className="flex items-center mb-6 bg-slate-800/50 px-3 py-2 rounded-lg w-fit">
+                      <MapPin className="w-4 h-4 text-indigo-400 mr-2" />
+                      <span className="text-slate-200 font-medium">{exp.company}</span>
+                    </div>
 
-                  <div className="space-y-4">
-                    {exp.projects.map((project, i) => (
-                      <motion.div
-                        key={i}
-                        className="bg-slate-800/50 p-4 rounded-xl border border-slate-700/50 group hover:border-indigo-500/30 transition-colors duration-300"
-                        whileHover={{ x: 5 }}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.3, delay: i * 0.1 + 0.2 }}
-                      >
-                        <h4 className="text-lg font-semibold text-white mb-2">
-                          {project.title}
-                        </h4>
-                        <p className="text-slate-300">{project.description}</p>
-                      </motion.div>
-                    ))}
+                    <div className="space-y-4">
+                      {exp.projects.map((project, i) => (
+                        <motion.div
+                          key={i}
+                          className="bg-slate-800/50 p-5 rounded-2xl border border-slate-700/50 hover:border-indigo-500/40 transition-all duration-300 relative overflow-hidden"
+                          whileHover={{ x: 5, scale: 1.02 }}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.3, delay: i * 0.1 + 0.2 }}
+                        >
+                          {/* Hover gradient */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/0 to-purple-500/0 hover:from-indigo-500/5 hover:to-purple-500/5 transition-all duration-300" />
+                          
+                          <div className="relative z-10">
+                            <h4 className="text-lg font-semibold text-white mb-2 flex items-center gap-2">
+                              <span className="w-2 h-2 rounded-full bg-indigo-400"></span>
+                              {project.title}
+                            </h4>
+                            <p className="text-slate-300 leading-relaxed">{project.description}</p>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

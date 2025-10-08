@@ -96,42 +96,98 @@ const SkillCard = ({
   color?: string;
 }) => {
   const colors = {
-    indigo:
-      "from-indigo-500/20 to-indigo-500/5 border-indigo-500/20 text-indigo-400",
-    blue: "from-blue-500/20 to-blue-500/5 border-blue-500/20 text-blue-400",
-    green:
-      "from-green-500/20 to-green-500/5 border-green-500/20 text-green-400",
-    red: "from-red-500/20 to-red-500/5 border-red-500/20 text-red-400",
-    teal: "from-teal-500/20 to-teal-500/5 border-teal-500/20 text-teal-400",
-    violet:
-      "from-violet-500/20 to-violet-500/5 border-violet-500/20 text-violet-400",
-    orange:
-      "from-orange-500/20 to-orange-500/5 border-orange-500/20 text-orange-400",
-    cyan: "from-cyan-500/20 to-cyan-500/5 border-cyan-500/20 text-cyan-400",
+    indigo: {
+      gradient: "from-indigo-500/20 to-indigo-500/5",
+      border: "border-indigo-500/20 hover:border-indigo-500/40",
+      text: "text-indigo-400",
+      glow: "group-hover:shadow-indigo-500/20",
+    },
+    blue: {
+      gradient: "from-blue-500/20 to-blue-500/5",
+      border: "border-blue-500/20 hover:border-blue-500/40",
+      text: "text-blue-400",
+      glow: "group-hover:shadow-blue-500/20",
+    },
+    green: {
+      gradient: "from-green-500/20 to-green-500/5",
+      border: "border-green-500/20 hover:border-green-500/40",
+      text: "text-green-400",
+      glow: "group-hover:shadow-green-500/20",
+    },
+    red: {
+      gradient: "from-red-500/20 to-red-500/5",
+      border: "border-red-500/20 hover:border-red-500/40",
+      text: "text-red-400",
+      glow: "group-hover:shadow-red-500/20",
+    },
+    teal: {
+      gradient: "from-teal-500/20 to-teal-500/5",
+      border: "border-teal-500/20 hover:border-teal-500/40",
+      text: "text-teal-400",
+      glow: "group-hover:shadow-teal-500/20",
+    },
+    violet: {
+      gradient: "from-violet-500/20 to-violet-500/5",
+      border: "border-violet-500/20 hover:border-violet-500/40",
+      text: "text-violet-400",
+      glow: "group-hover:shadow-violet-500/20",
+    },
+    orange: {
+      gradient: "from-orange-500/20 to-orange-500/5",
+      border: "border-orange-500/20 hover:border-orange-500/40",
+      text: "text-orange-400",
+      glow: "group-hover:shadow-orange-500/20",
+    },
+    cyan: {
+      gradient: "from-cyan-500/20 to-cyan-500/5",
+      border: "border-cyan-500/20 hover:border-cyan-500/40",
+      text: "text-cyan-400",
+      glow: "group-hover:shadow-cyan-500/20",
+    },
   };
 
-  const colorClass = colors[color as keyof typeof colors] || colors.indigo;
+  const colorScheme = colors[color as keyof typeof colors] || colors.indigo;
 
   return (
     <motion.div
-      className={`bg-gradient-to-br ${colorClass} backdrop-blur-md p-6 rounded-xl border hover:border-opacity-50 transition-all duration-300 h-full`}
-      whileHover={{
-        y: -5,
-        boxShadow: "0 10px 25px -5px rgba(79, 70, 229, 0.2)",
-      }}
+      className="group h-full"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.3 }}
+      whileHover={{ y: -8 }}
     >
-      <div className="flex items-center mb-4">
-        <div className="p-3 rounded-full bg-slate-800 mr-4 border border-slate-700">
-          <Icon className="w-6 h-6" />
+      <div
+        className={`bg-gradient-to-br ${colorScheme.gradient} backdrop-blur-md p-6 rounded-2xl border ${colorScheme.border} transition-all duration-300 h-full relative overflow-hidden shadow-lg ${colorScheme.glow}`}
+      >
+        {/* Animated shine effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+        
+        <div className="relative z-10">
+          <div className="flex items-center mb-4">
+            <motion.div 
+              className={`p-3 rounded-xl bg-slate-800/80 mr-4 border border-slate-700 group-hover:scale-110 transition-transform`}
+              whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+              transition={{ duration: 0.5 }}
+            >
+              <Icon className={`w-6 h-6 ${colorScheme.text}`} />
+            </motion.div>
+            <h3 className="text-xl font-bold text-white font-display group-hover:text-indigo-200 transition-colors">
+              {title}
+            </h3>
+          </div>
+          
+          <div className="mb-4">
+            <p className={`text-sm font-mono mb-2 ${colorScheme.text} font-semibold`}>
+              {technologies}
+            </p>
+          </div>
+          
+          <p className="text-slate-300 text-sm leading-relaxed group-hover:text-slate-200 transition-colors">
+            {description}
+          </p>
         </div>
-        <h3 className="text-xl font-bold text-white font-display">{title}</h3>
       </div>
-      <p className="text-sm text-slate-300 font-mono mb-4">{technologies}</p>
-      <p className="text-slate-300">{description}</p>
     </motion.div>
   );
 };
